@@ -1,6 +1,6 @@
 import React from 'react'
 
-const MyAppoinments = () => {
+const MyAppointments = () => {
   return (
     <div>
       
@@ -8,4 +8,4 @@ const MyAppoinments = () => {
   )
 }
 
-export default MyAppoinments
+export default MyAppointments
