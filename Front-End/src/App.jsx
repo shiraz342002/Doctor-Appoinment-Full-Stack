@@ -7,9 +7,11 @@ import Doctor from './pages/Doctor.jsx'
 import MyAppointments from './pages/MyAppointments.jsx'
 import MyProfile from './pages/MyProfile.jsx'
 import Login from './pages/Login.jsx'
+import Navbar from './components/Navbar.jsx'
 const App = () => {
   return (
     <div className='mx-4 sm:mx-[10%]'>
+    <Navbar/>
       <Routes >
         <Route path='/' element={<Home/>}></Route>
         <Route path='/home' element={<Home/>}></Route>
