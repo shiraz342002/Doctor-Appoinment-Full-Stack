@@ -8,6 +8,7 @@ import MyProfile from './pages/MyProfile.jsx'
 import Login from './pages/Login.jsx'
 import MyAppointment from './pages/MyAppointments.jsx'
 import Navbar from './components/Navbar.jsx'
+import Footer from './components/Footer.jsx'
 const App = () => {
   return (
     <div className='mx-4 sm:mx-[10%]'>
@@ -23,8 +24,8 @@ const App = () => {
         <Route path='/myprofile' element={<MyProfile/>}></Route>
         <Route path='/login' element={<Login/>}></Route>
         <Route path='/contact' element={<Contact/>}></Route>
-
       </Routes>
+      <Footer/>
     </div>
   )
 }

@@ -6,7 +6,6 @@ import {BrowserRouter} from "react-router-dom"
 import AppContextProvider from './context/AppContext.jsx'
 
 createRoot(document.getElementById('root')).render(
-  https://youtu.be/C3U1RforbH4?t=6014
   <BrowserRouter>
   <AppContextProvider>
     <App />
