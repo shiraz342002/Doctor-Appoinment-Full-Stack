@@ -9,6 +9,7 @@ const MyAppointment  = () => {
   const [docSlots,setDocSlots]=useState([])
   const [slotIndex,setSlotIndex]=useState(0)
   const [slotTime,setSlotTime]=useState('')
+  const daysOfWeek=['SUN','MON','TUE','WED','THU','FRI','SAT']
 
   const fetchDocInfo=()=>{
       const docInfo = doctors.find(doc=>doc._id===docId)
@@ -21,23 +22,32 @@ const MyAppointment  = () => {
     // cuurent date 
     let today = new Date()
     for(let i=0; i<7; i++){
-      let curentDate= new Date(today)
-      curentDate.setDate(today.getDate()+i)
+      let currentDate= new Date(today)
+      currentDate.setDate(today.getDate()+i)
 
       let endTime=new Date()
-      endTime.setDate(today.getDate()+1)
+      endTime.setDate(today.getDate()+i)
       endTime.setHours(21,0,0,0)
 
-      if(today.getDate()===curentDate.getDate()){
-        curentDate.setHours(curentDate.getHours()>10?curentDate.getHours()+1:10)
-        curentDate.setMinutes(curentDate.getMinutes()>30?30:0)
+      if(today.getDate()===currentDate.getDate()){
+        currentDate.setHours(currentDate.getHours()>10?currentDate.getHours()+1:10)
+        currentDate.setMinutes(currentDate.getMinutes()>30?30:0)
       }else{
-        curentDate.setHours(10)
-        curentDate.setMinutes(0)
+        currentDate.setHours(10)
+        currentDate.setMinutes(0)
       }
-      while(curentDate<endTime){
-        let formatatedTime
+      let timeSlots=[]
+      while(currentDate<endTime){
+        let formatatedTime=currentDate.toLocaleDateString([],{hour:'2-digit',minute:'2-digit'})
+
+      timeSlots.push({
+        datetime:new Date(currentDate),
+        time:formatatedTime
+      })
+      currentDate.setMinutes(currentDate.getMinutes()+30)
       }
+
+      setDocSlots(prev=>([...prev,timeSlots]))
     }
   }  
 
@@ -49,6 +59,12 @@ const MyAppointment  = () => {
   useEffect(()=>{
     getAvailableSlot()
   },[docInfo])
+
+  useEffect(() => {
+    console.log(docSlots);
+    
+  }, [docSlots])
+  
 
   return docInfo && (
     <div>
@@ -71,8 +87,21 @@ const MyAppointment  = () => {
               <p className='text-gray-600 font-medium mt-4'>
               Appointment fee: <span className='text-gray-600'> {currencySymbol}{docInfo.fees}</span>
               </p>
-              {/* https://youtu.be/C3U1RforbH4?t=8830 */}
         </div>
+      </div>
+      {/* bookings  */}
+      <div className='sm:ml-72 sm:pl-4 mt-4 font-medium text-gray-700'>
+      <p>Booking slots</p>
+      <div>
+        {
+          docSlots.length && docSlots.map((item,index)=>(
+            <div key={index}>
+              <p>{item[0] && daysOfWeek[item[0].datetime.getDay()]}</p>
+              <p>{item[0] && item[0].datetime.getDate()}</p>
+            </div>
+          )) 
+        }
+      </div>
       </div>
     </div>
   )
