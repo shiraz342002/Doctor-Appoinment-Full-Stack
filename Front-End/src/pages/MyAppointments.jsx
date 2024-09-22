@@ -4,8 +4,9 @@ import {AppContext} from "../context/AppContext"
 import { assets } from '../assets/assets_frontend/assets'
 const MyAppointment  = () => {
   const {docId} = useParams()
-  const {doctors} = useContext(AppContext)
+  const {doctors,currencySymbol} = useContext(AppContext)
   const [docInfo,setDocInfo]=useState(null)
+   
 
   const fetchDocInfo=()=>{
       const docInfo = doctors.find(doc=>doc._id===docId)
@@ -34,6 +35,10 @@ const MyAppointment  = () => {
                 About <img src={assets.info_icon} alt="" /></p>
                 <p className='text-sm text-gray-500 max-w-[700px] mt-1 '>{docInfo.about}</p>
               </div>
+              <p className='text-gray-600 font-medium mt-4'>
+              Appointment fee: <span className='text-gray-600'> {currencySymbol}{docInfo.fees}</span>
+              </p>
+              {/* https://youtu.be/C3U1RforbH4?t=8830 */}
         </div>
       </div>
     </div>
