@@ -116,6 +116,7 @@ const MyAppointment = () => {
         </div>
         <button className='bg-[#5F6FFF] text-white my-6 text-sm font-light px-14 py-3 rounded-full'>Book an appointment</button>
       </div>
+      {/* Related Docs */}
     </div>
   )
 }
