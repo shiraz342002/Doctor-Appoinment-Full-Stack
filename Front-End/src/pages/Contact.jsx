@@ -21,7 +21,7 @@ const Contact = () => {
           <b className='text-lg text-gray-600 mb-4'>Careers at PRESCRIPTO</b>
           <p>Learn more about our teams and job openings.</p>
           <br />
-          <button className='border w-[140px]  py-4 border-black'>Explore Jobs</button>
+          <button className='border w-[140px]  py-4 border-black hover:bg-black hover:text-white transition-all duration-500'>Explore Jobs</button>
         </div>
       </div>
     </div>
