@@ -15,12 +15,12 @@ const MyProfile = () => {
     gender: "Male",
     dob: "26 October 2004"
   })
-
+//------------------------Styling To be Done --------------
   return (
     <div>
       <img src={userData.image} alt="" />
       {
-        isEdit ? <input value={userData.name} onChange={(e) => setUserData(prev => ({ ...prev, name: e.target.value }))} type="text" /> :
+          isEdit ? <input value={userData.name} onChange={(e) => setUserData(prev => ({ ...prev, name: e.target.value }))} type="text" /> :
           <p>{userData.name}</p>
       }
       <hr />
@@ -67,14 +67,13 @@ const MyProfile = () => {
             isEdit ? <input type="date" onChange={(e) => setUserData(prev => ({ ...prev, dob: e.target.value }))} value={userData.dob} />
               : <p>{userData.dob}</p>
           }
-
         </div>
       </div>
       <div>
         {
           isEdit?
-          <button onClick={()=>setIsEdit(false)}>Save Information</button>
-          :<button onClick={()=>setIsEdit(true)}>Edit</button>
+          <button onClick={()=>setIsEdit(false)} >Save Information</button>
+          :<button onClick={()=>setIsEdit(true)} >Edit</button>
         }
       </div>
 
