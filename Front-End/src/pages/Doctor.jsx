@@ -5,6 +5,7 @@ const Doctor = () => {
   const { speciality } = useParams()
   const { doctors } = useContext(AppContext)
   const [filterDoc, setFilterDoc] = useState([])
+  con
   const navigate = useNavigate()
   const applyFilter = () => {
     if (speciality) {
@@ -21,6 +22,7 @@ const Doctor = () => {
     <div className=''>
       <p className='text-gray-600'>Browse through the doctors specialist.</p>
       <div className='flex flex-col sm:flex-row gap-5 items-start mt-5 '>
+        <button>Filters</button>
         <div className='flex flex-col gap-5 text-sm text-gray-600'>
           <p
             onClick={() => speciality === 'General physician' ? navigate('/doctors') : navigate('/doctors/General physician')}
