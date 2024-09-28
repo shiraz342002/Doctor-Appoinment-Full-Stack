@@ -1,0 +1,33 @@
+# Node.js dependencies
+Back-End/node_modules/
+Front-End/node_modules/
+
+# Logs
+Back-End/logs/
+Back-End/npm-debug.log*
+Back-End/yarn-debug.log*
+Back-End/yarn-error.log*
+Front-End/logs/
+Front-End/npm-debug.log*
+Front-End/yarn-debug.log*
+Front-End/yarn-error.log*
+
+# Environment variables
+Back-End/.env
+Front-End/.env
+
+# Build outputs
+Back-End/dist/
+Back-End/build/
+Front-End/build/
+
+# Ignore IDE/Editor specific files
+.vscode/
+.idea/
+
+# Ignore OS-specific files
+.DS_Store
+Thumbs.db
+
+# Optional: Ignore database or other sensitive files
+Back-End/database.sqlite
