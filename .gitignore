@@ -1,6 +1,7 @@
 # Node.js dependencies
 Back-End/node_modules/
 Front-End/node_modules/
+Admin-Panel/node_modules/
 
 # Logs
 Back-End/logs/
@@ -15,11 +16,13 @@ Front-End/yarn-error.log*
 # Environment variables
 Back-End/.env
 Front-End/.env
+Admin-Panel/ .env
 
 # Build outputs
 Back-End/dist/
 Back-End/build/
 Front-End/build/
+Admin-Panel/build/
 
 # Ignore IDE/Editor specific files
 .vscode/

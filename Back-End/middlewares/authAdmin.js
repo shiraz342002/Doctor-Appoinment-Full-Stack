@@ -3,7 +3,7 @@ import jwt from "jsonwebtoken";
 //admin auth middleware
 const authAdmin = async (req, res, next) => {
   try {
-    console.log("Middleware Working");
+    // console.log("Middleware Working");
     
     const {adminToken}=req.headers.authorization;
     console.log(adminToken);
