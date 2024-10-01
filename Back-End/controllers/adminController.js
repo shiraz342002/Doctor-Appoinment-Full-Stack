@@ -18,6 +18,16 @@ const addDoctor = async (req, res) => {
       fees,
       address,
     } = req.body;
+    // console.log(name);
+    // console.log(email);
+    // console.log(password);
+    // console.log(speciality);
+    // console.log(degree);
+    // console.log(experiance);
+    // console.log(about);
+    // console.log(fees);
+    // console.log(address);
+    
     const imageFile = req.file;
     if(!name || !email || !password || !speciality || !degree || !experiance || !about || !fees || !address ){
       return res.json({ success: false, message: "Missing Details" });

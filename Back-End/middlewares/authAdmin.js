@@ -5,13 +5,13 @@ const authAdmin = async (req, res, next) => {
   try {
     // console.log("Middleware Working");
     
-    const {adminToken}=req.headers.authorization;
-    console.log(adminToken);
+    const {atoken}=req.headers;
+    // console.log(atoken);
     
-    if(!adminToken){
+    if(!atoken){
         res.json({ success: false, message:"Not Authorized login Again" });
     }
-    const token_decode = jwt.verify(adminToken,process.env.JWT_SECRET)
+    const token_decode = jwt.verify(atoken,process.env.JWT_SECRET)
     if(token_decode!==process.env.ADMIN_EMAIL + process.env.ADMIN_PASSWORD){
         res.json({ success: false, message:"Not Authorized login Again" });
     }
