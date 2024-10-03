@@ -11,9 +11,24 @@ const getAllDoctors=async()=>{
     try {        
         const {data} = await axios.get(backendUrl+'/api/admin/all-doctors',{headers:{aToken}})
         if(data.success){
-            setDoctors([data.doctors])
-            console.log(data.doctors);
+            setDoctors(data.doctors)
+            // console.log(data.doctors);
             
+        }else{
+            toast.error(data.message)
+        }
+    } catch (error) {
+        toast.error(error.message)
+    }
+}
+const changeAvailablity=async(docId)=>{
+    try {
+        console.log("changeAvailablity "+docId);
+        
+        const {data}= await axios.post(backendUrl+'/api/admin/change-availability',{docId},{headers:{aToken}})
+        if(data.success){
+            toast.success(data.message)
+            getAllDoctors()
         }else{
             toast.error(data.message)
         }
@@ -27,6 +42,7 @@ const value={
     backendUrl,
     doctors,
     getAllDoctors,
+    changeAvailablity
 }
 return(
     <AdminContext.Provider value={value}>
