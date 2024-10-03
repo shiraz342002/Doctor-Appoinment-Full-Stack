@@ -45,14 +45,7 @@ const AddDoctor = () => {
       if(data.success){
         toast.success(data.message)
         setDocImg(false)
-        // setName('')
-        // setEmail('')
-        // setDegree('')
-        // setPassword('')
-        // setAddress1('')
-        // setAddress2('')
-        // setAbout('')
-        // setFees('')
+        
 
       }else{
         toast.error(data.message)

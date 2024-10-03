@@ -6,7 +6,7 @@ const authAdmin = async (req, res, next) => {
     // console.log("Middleware Working");
     
     const {atoken}=req.headers;
-    // console.log(atoken);
+    console.log(atoken);
     
     if(!atoken){
         res.json({ success: false, message:"Not Authorized login Again" });
