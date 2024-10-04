@@ -5,7 +5,7 @@ const Doctor = () => {
   const { speciality } = useParams()
   const { doctors } = useContext(AppContext)
   const [filterDoc, setFilterDoc] = useState([])
-  const [showFilter,setShowFilter]=useState(false)
+  const [showFilter, setShowFilter] = useState(false)
   const navigate = useNavigate()
   const applyFilter = () => {
     if (speciality) {
@@ -22,8 +22,8 @@ const Doctor = () => {
     <div className=''>
       <p className='text-gray-600'>Browse through the doctors specialist.</p>
       <div className='flex flex-col sm:flex-row gap-5 items-start mt-5 '>
-        <button className={`py-1 px-3 border rounded text-sm transition-all sm:hidden ${showFilter?'bg-[#5F6FFF] text-white':''}`} onClick={()=>setShowFilter(prev=>!prev)}>Filters</button>
-        <div className={` flex-col gap-5 text-sm text-gray-600 ${showFilter?'flex':'hidden sm:flex'}`}>
+        <button className={`py-1 px-3 border rounded text-sm transition-all sm:hidden ${showFilter ? 'bg-[#5F6FFF] text-white' : ''}`} onClick={() => setShowFilter(prev => !prev)}>Filters</button>
+        <div className={` flex-col gap-5 text-sm text-gray-600 ${showFilter ? 'flex' : 'hidden sm:flex'}`}>
           <p
             onClick={() => speciality === 'General physician' ? navigate('/doctors') : navigate('/doctors/General physician')}
             className={`w-[94vw] sm:w-auto pl-3 py-1.5 pr-16 border border-gray-300 rounded transition-all cursor-pointer ${speciality === 'General physician' ? "bg-indigo-100 text-black" : ""}`}
@@ -65,7 +65,10 @@ const Doctor = () => {
         <div className='w-full grid grid-cols-auto gap-4 gap-y-6'>
           {
             filterDoc.map((item, index) => (
-              <div onClick={() => navigate(`/appointment/${item._id}`)} className='border border-blue-200 overflow-hidden rounded-xl cursor-pointer hover:translate-y-[-10px] transition-all duration-500    ' key={index}>
+              <div onClick={() => {
+                window.scrollTo({ top: 0, behavior: 'smooth' }); // Scroll to the top smoothly
+                navigate(`/appointment/${item._id}`); // Navigate to the new route
+              }} className='border border-blue-200 overflow-hidden rounded-xl cursor-pointer hover:translate-y-[-10px] transition-all duration-500    ' key={index}>
                 <img className='bg-blue-50' src={item.image} alt="" />
                 <div className='p-4'>
                   <div className='flex items-center gap-2 text-sm text-center text-green-500  '>
