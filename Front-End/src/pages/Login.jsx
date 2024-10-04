@@ -22,26 +22,36 @@ const Login = () => {
       if(data.success){
         localStorage.setItem('token',data.token)
         // setToken(data.token)
-        toast.success("Registered Successfully")
+        toast.success("Registered Successfully"),{
+          autoClose:1500
+        }
         setName('')
         setEmail('')
         setPassword('')
         setState('Login')
       }else{
-        toast.error(data.message)
+        toast.error(data.message,{
+          autoClose:1500
+        })
       }
     }else{
       const {data} = await axios.post(backendUrl+'/api/user/login',{password,email})
       if(data.success){
         localStorage.setItem('token',data.token)
         setToken(data.token)
-        toast.success("Logged in Successfully")
+        toast.success("Logged in Successfully",{
+          autoClose:1500
+        })
       }else{
-        toast.error(data.message)
+        toast.error(data.message,{
+         autoClose:1500
+        })
       }
     }
   }catch(err){
-    toast.error(err.message)
+    toast.error(err.message,{
+      autoClose:1500
+    })
   }
   }
   useEffect(()=>{

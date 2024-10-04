@@ -23,15 +23,23 @@ const MyProfile = () => {
 
       const {data}= await axios.post(backendUrl+'/api/user/update-profile',formData,{headers:{token}})
       if(data.success){
-        toast.success(data.message)
+        console.log(data);
+        
+        toast.success(data.message,{
+         autoClose:1500
+        })
         await loadUserProfileData()
         setIsEdit(false)
         setImage(false)
       }else{
-        toast.error(data.message)
+        toast.error(data.message,{
+          autoClose:1500
+        })
       }
     } catch (error) {
-      toast.error(error.message)
+      toast.error(error.message,{
+        autoClose:1500
+      })
       console.log(error);
     }
   }
