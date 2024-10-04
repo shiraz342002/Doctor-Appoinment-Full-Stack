@@ -126,7 +126,7 @@ try {
       slots_booked[slotDate].push(slotTime)
     }
   }else{
-    console.log("Im exec");
+    // console.log("Im exec");
     
     slots_booked[slotDate]=[]
     slots_booked[slotDate].push(slotTime)
@@ -154,4 +154,17 @@ try {
     res.json({ success: false, message: err.message });
 }
 }
-export { registerUser, loginUser, getProfile,updateProfile,bookAppointment };
+
+//api to get user booked appointments
+const listAppointment=async(req,res)=>{
+  try {
+    const {userId}=req.body
+    const appointments=await appointmentModel.find({userId})
+    res.json({success:true,appointments})
+
+  } catch (err) {
+    console.log(err);
+    res.json({ success: false, message: err.message });
+  }
+}
+export { registerUser, loginUser, getProfile,updateProfile,bookAppointment,listAppointment };
