@@ -126,6 +126,8 @@ try {
       slots_booked[slotDate].push(slotTime)
     }
   }else{
+    console.log("Im exec");
+    
     slots_booked[slotDate]=[]
     slots_booked[slotDate].push(slotTime)
   }
