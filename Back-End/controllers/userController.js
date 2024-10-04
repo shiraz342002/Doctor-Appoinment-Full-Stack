@@ -91,18 +91,27 @@ const getProfile = async (req, res) => {
 };
 
 const updateProfile=async(req,res)=>{
-    console.log("Im Working");
+    
     
     try {
         const {userId,name,phone,address,dob,gender}=req.body
         const imageFile=req.file;
+        console.log(name);
+        console.log(phone);
+        console.log(address);
+        console.log(gender);
+        console.log(dob);
+        console.log(req.file);
+        
         if(!name || !phone || !address || !dob || !gender){
             return res.json({success:false,message:"Data Missing"})            
         }
         await userModel.findByIdAndUpdate(userId,{name,phone,address:JSON.parse(address),dob,gender})
         if(imageFile){
             const imageUpload= await cloudinary.uploader.upload(imageFile.path,{resource_type:'image'})
-            const imgUrl=imageFile.secure_url
+            const imgUrl=imageUpload.secure_url
+            console.log(imgUrl);
+            
             await userModel.findByIdAndUpdate(userId,{image:imgUrl})
         } 
         // console.log("Worked");

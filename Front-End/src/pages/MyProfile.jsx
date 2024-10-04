@@ -2,23 +2,37 @@ import React, { useContext, useState } from 'react'
 import { AppContext } from '../context/AppContext'
 import {assets} from "../assets/assets_frontend/assets.js"
 import axios from 'axios'
+import { toast } from 'react-toastify'
 const MyProfile = () => {
   const {userData,setUserData,backendUrl,loadUserProfileData,token}=useContext(AppContext)
   const [isEdit, setIsEdit] = useState(false)
   const [image,setImage]=useState(false)
   const updateUserProfileData=async()=>{
     try {
+      console.log(userData.gender);
+      
       const formData= new FormData()
       formData.append('name',userData.name)
       formData.append('phone',userData.phone)
       formData.append('address',JSON.stringify(userData.address))
-      formData.append('gener',userData.gender)
+      formData.append('gender',userData.gender)
       formData.append('dob',userData.dob)
+      console.log(image);
+      
       image && formData.append('image',image)
 
-      const {data}= await axios.post(backendUrl+'/api/user/update-profile',formData,{headers:{}})
+      const {data}= await axios.post(backendUrl+'/api/user/update-profile',formData,{headers:{token}})
+      if(data.success){
+        toast.success(data.message)
+        await loadUserProfileData()
+        setIsEdit(false)
+        setImage(false)
+      }else{
+        toast.error(data.message)
+      }
     } catch (error) {
-      
+      toast.error(error.message)
+      console.log(error);
     }
   }
 
@@ -53,8 +67,8 @@ const MyProfile = () => {
           <p className='font-medium'>Phone:</p>
           {
             isEdit ?
-              <input className='bg-gray-100 max-w-52' value={userData.phono} onChange={(e) => setUserData(prev => ({ ...prev, phono: e.target.value }))} type="text" />
-              : <p className='text-blue-400'>{userData.phono}</p>
+              <input className='bg-gray-100 max-w-52' value={userData.phone} onChange={(e) => setUserData(prev => ({ ...prev, phone: e.target.value }))} type="text" />
+              : <p className='text-blue-400'>{userData.phone}</p>
           }
           <p className='font-medium'>Address:</p>
           {
@@ -77,7 +91,9 @@ const MyProfile = () => {
         <div className='grid grid-cols-[1fr_3fr] gap-y-2.5 mt-3 text-neutral-700 '>
           <p className='font-medium'>Gender:</p>
           {
-            isEdit ? <select className='max-w-20 bg-gray-100' onChange={(e) => setUserData(prev => ({ ...prev, gender: e.target.value }))} value={userData.gender}>
+            isEdit ? <select className='max-w-28 bg-gray-100' onChange={(e) => setUserData(prev => ({ ...prev, gender: e.target.value }))} value={userData.gender}>
+              
+              <option value="Not Selected">Not Selected</option>
               <option value="Male">Male</option>
               <option value="Female">Female</option>
             </select> :

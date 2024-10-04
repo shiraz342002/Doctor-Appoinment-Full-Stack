@@ -61,10 +61,10 @@ const Appointment = () => {
     getAvailableSlot()
   }, [docInfo])
 
-  useEffect(() => {
-    console.log(docSlots);
+  // useEffect(() => {
+  //   // console.log(docSlots);
 
-  }, [docSlots])
+  // }, [docSlots])
 
 
   return docInfo && (
