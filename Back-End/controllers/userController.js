@@ -7,7 +7,7 @@ import {v2 as cloudinary} from "cloudinary"
 //api for user registration
 const registerUser = async (req, res) => {
   try {
-    console.log("Register User");
+    // console.log("Register User");
     const { name, email, password } = req.body;
     if (!name || !email || !password) {
       return res.json({ success: false, message: "Missing Details" });
@@ -59,28 +59,37 @@ const loginUser = async (req, res) => {
     res.json({ success: false, message: err.message });
   }
 };
-  
-// api to get user data
-const getProfile = async (req, res) => {
-  try {
-    const { userId } = req.body;
-    if (!userId) {
-      return res.status(400).json({ success: false, message: "User ID is required" });
-    }
 
-    const userData = await userModel.findById(userId).select("-password");
-    if (!userData) {
-      return res.status(404).json({ success: false, message: "User not found" });
+const getProfile = async (req, res) => {
+    try {
+        const { userId } = req.body;
+
+        if (!userId) {
+            console.log("User ID missing");
+            return res.status(400).json({ success: false, message: "User ID is required" });
+        }
+
+        const userData = await userModel.findById(userId).select("-password");
+        
+        if (!userData) {
+            console.log("User not found");
+            return res.status(404).json({ success: false, message: "User not found" });
+        }
+
+        console.log("Getting Profile ", userData);
+
+        if (!res.headersSent) {
+            console.log("Sending response");
+            return res.json({ success: true, userData });
+        }
+
+        console.log("Headers already sent");
+    } catch (error) {
+        console.error("Error fetching user profile: ", error);
+        return res.status(500).json({ success: false, message: "Server error" });
     }
-    console.log(userData);
-    
-    return res.json({ success: true, userData });
-  } catch (err) {
-    console.log(err);
-    return res.status(500).json({ success: false, message: "Server error" });
-  }
 };
-// api to update profile
+
 const updateProfile=async(req,res)=>{
     console.log("Im Working");
     
@@ -96,7 +105,7 @@ const updateProfile=async(req,res)=>{
             const imgUrl=imageFile.secure_url
             await userModel.findByIdAndUpdate(userId,{image:imgUrl})
         } 
-        console.log("Worked");
+        // console.log("Worked");
         
         res.json({success:true,message:"Profile updated"})
     } catch (err) {

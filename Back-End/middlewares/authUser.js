@@ -6,18 +6,17 @@ const authUser = async (req, res, next) => {
     // console.log("Middleware Working");
     
     const {token}=req.headers;
-    console.log(token);
+    // console.log(token);
     
     if(!token){
         return res.json({ success: false, message:"Not Authorized login Again" });
     }
     const token_decode = jwt.verify(token,process.env.JWT_SECRET)
-    console.log("Im Middleware "+token_decode.id);
+    // console.log("Im Middleware "+token_decode.id);
+    // console.log(req.body.userId);
     
     req.body.userId=token_decode.id
-    if(token_decode!==process.env.ADMIN_EMAIL + process.env.ADMIN_PASSWORD){
-        res.json({ success: false, message:"Not Authorized login Again" });
-    }
+    
     next()
   } catch (err) {
     console.log(err);
