@@ -76,7 +76,7 @@ const getProfile = async (req, res) => {
             return res.status(404).json({ success: false, message: "User not found" });
         }
 
-        console.log("Getting Profile ", userData);
+        // console.log("Getting Profile ", userData);
 
         if (!res.headersSent) {
             return res.json({ success: true, userData });
@@ -117,7 +117,7 @@ try {
   if(!docData.available){
     return res.json({success:false,message:"Doctor not Available"})
   }
-  let slots_booked=docData.slot_booked
+  let slots_booked=docData.slots_booked
   // check if slot is available
   if(slots_booked[slotDate]){
     if(slots_booked[slotDate].includes(slotTime)){
@@ -133,7 +133,7 @@ try {
   delete docData.slots_booked
   const appointmentData={
     userId,
-    docId,
+    docId,   
     userData,
     docData,
     amount:docData.fees,
@@ -152,4 +152,4 @@ try {
     res.json({ success: false, message: err.message });
 }
 }
-export { registerUser, loginUser, getProfile,updateProfile };
+export { registerUser, loginUser, getProfile,updateProfile,bookAppointment };
