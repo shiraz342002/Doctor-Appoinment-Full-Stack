@@ -9,7 +9,7 @@ const MyProfile = () => {
   const [image,setImage]=useState(false)
   const updateUserProfileData=async()=>{
     try {
-      console.log(userData.gender);
+      // console.log(userData.gender);
       
       const formData= new FormData()
       formData.append('name',userData.name)
@@ -17,13 +17,13 @@ const MyProfile = () => {
       formData.append('address',JSON.stringify(userData.address))
       formData.append('gender',userData.gender)
       formData.append('dob',userData.dob)
-      console.log(image);
+      // console.log(image);
       
       image && formData.append('image',image)
 
       const {data}= await axios.post(backendUrl+'/api/user/update-profile',formData,{headers:{token}})
       if(data.success){
-        console.log(data);
+        // console.log(data);
         
         toast.success(data.message,{
          autoClose:1500

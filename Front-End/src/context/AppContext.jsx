@@ -34,9 +34,7 @@ const loadUserProfileData=async()=>{
     try {
         // console.log(token);
         const {data} = await axios.get(backendUrl+'/api/user/get-profile',{headers:{token}})
-        console.log(data);
-        
-        
+        // console.log(data);
         if(data.success){
             setUserData(data.userData)
         }
