@@ -27,7 +27,7 @@ const MyAppointments = () => {
 
     const cancelAppointment = async (appointmentId) => {
         try {
-            
+            await new Promise((resolve) => setTimeout(resolve, 3000));
             const { data } = await axios.post(backendUrl + '/api/user/cancel-appointments', { appointmentId }, { headers: { token } })
             if (data.success) {
                 toast.success(data.message)
@@ -47,7 +47,7 @@ const MyAppointments = () => {
     const payOnline = async (appointmentId) => {
         try {
            
-           
+            await new Promise((resolve) => setTimeout(resolve, 3000));
             const { data } = await axios.post(backendUrl + '/api/user/pay-online',
                 { appointmentId },
                 { headers: { token } });
