@@ -27,7 +27,6 @@ const MyAppointments = () => {
 
     const cancelAppointment = async (appointmentId) => {
         try {
-            console.log(appointmentId);
             
             const { data } = await axios.post(backendUrl + '/api/user/cancel-appointments', { appointmentId }, { headers: { token } })
             if (data.success) {
@@ -47,21 +46,23 @@ const MyAppointments = () => {
     }
     const payOnline = async (appointmentId) => {
         try {
-            console.log(appointmentId);
-            
-            const { data } = await axios.post(backendUrl + '/api/user/pay-online', { appointmentId }, { headers: { token } })
-            console.log(data);
+           
+           
+            const { data } = await axios.post(backendUrl + '/api/user/pay-online',
+                { appointmentId },
+                { headers: { token } });
+
             if (data.success) {
-                toast.success(data.message)
-                getUserAppointments()
+                toast.success(data.message);
+                getUserAppointments();
             } else {
-                toast.error(data.message)
+                toast.error(data.message);
             }
         } catch (error) {
-            toast.error("Payment Failed please try Again")
+            toast.error("Payment Failed. Please try again.");
             console.log(error);
         }
-    }
+    };
 
     useEffect(() => {
         if (token) {
@@ -87,7 +88,8 @@ const MyAppointments = () => {
                         </div>
                         <div></div>
                         <div className='flex flex-col justify-end gap-2'>
-                            {!item.cancelled && <button onClick={() => payOnline(item._id)} className='text-sm text-stone-500 text-center sm:min-w-48 py-2 border hover:bg-[#5F6FFF] hover:text-white transition-all duration-300 '>Pay Online</button>}
+                            {!item.cancelled && item.payment && <button className='sm:min-w-48 py-2 border rounded text-white text-medium bg-green-500'>Paid</button>}
+                            {!item.cancelled && !item.payment && <button onClick={() => payOnline(item._id)} className='text-sm text-stone-500 text-center sm:min-w-48 py-2 border hover:bg-[#5F6FFF] hover:text-white transition-all duration-300 '>Pay Online</button>}
                             {!item.cancelled && <button onClick={() => cancelAppointment(item._id)} className='text-sm text-stone-500 text-center sm:min-w-48 py-2 border hover:bg-red-600 hover:text-white transition-all duration-300: '>Cancel appointment</button>}
                             {item.cancelled && <button className='min-w-48 py-2 border border-red-500 rounded text-red-500 '>Appointment Cancalled</button>}
                         </div>
