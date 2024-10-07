@@ -217,23 +217,41 @@ const cancelAppointment = async (req, res) => {
 // Razorpay Payment Integration
 const paymentRazorPay = async (req, res) => {
   const { appointmentId } = req.body;
-  const appointmentData = appointmentModel.findById(appointmentId);
+
   try {
-    if (!appointmentData && !appointmentData.cancelled) {
+    const appointmentData = await appointmentModel.findById(appointmentId);
+
+    if (!appointmentData || appointmentData.cancelled) {
       return res.json({
         success: false,
         message: "Appointment already cancelled or not found",
       });
-      await appointmentModel.findByIdAndUpdate(appointmentId, {
-        cancelled: true,
-      });
-
     }
+    if (appointmentData.payment===true) {
+      return res.json({
+        success: false,
+        message: "Payment already made for this appointment",
+      });
+    }
+
+    
+    await appointmentModel.findByIdAndUpdate(appointmentId, {
+      payment: true,
+    });
+
+    return res.json({
+      success: true,
+      message: "Payment Successful",
+    });
   } catch (err) {
     console.log(err);
-    res.json({ success: false, message: err.message });
+    res.json({
+      success: false,
+      message: "Something went wrong. Please try again.",
+    });
   }
 };
+
 export {
   registerUser,
   loginUser,
@@ -242,5 +260,5 @@ export {
   bookAppointment,
   listAppointment,
   cancelAppointment,
-  paymentRazorPay
+  paymentRazorPay,
 };
