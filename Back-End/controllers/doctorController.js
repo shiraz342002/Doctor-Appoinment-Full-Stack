@@ -66,11 +66,17 @@ const appointmentsDoctor=async(req,res)=>{
 
 //Api to cancel appointment  
 const appointmentCompleted=async(req,res)=>{
+ 
+  
   try {
     const {docId,appointmentId} =req.body
-    const appointmentdata=appointmentModel.findById(appointmentId)
+    console.log(docId,appointmentId);
+    
+    const appointmentdata=await appointmentModel.findById(appointmentId)
     if(appointmentdata && appointmentdata.docId===docId){
       await appointmentModel.findByIdAndUpdate(appointmentId,{isCompleted:true})
+     
+      
       return res.json({success:true,message:"Appointment Completed"})
     }else{
       return res.json({success:false,message:"Mark Failed"})
@@ -84,7 +90,7 @@ const appointmentCompleted=async(req,res)=>{
 const appointmentCancel=async(req,res)=>{
   try {
     const {docId,appointmentId} =req.body
-    const appointmentdata=appointmentModel.findById(appointmentId)
+    const appointmentdata=await appointmentModel.findById(appointmentId)
     if(appointmentdata && appointmentdata.docId===docId){
       await appointmentModel.findByIdAndUpdate(appointmentId,{cancelled:true})
       return res.json({success:true,message:"Appointment Cancelled"})
