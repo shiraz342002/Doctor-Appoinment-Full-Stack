@@ -11,8 +11,45 @@ const DoctorProfile = () => {
       getDoctorProfile()
     }
   },[dToken])
-  return (
-    <div>DoctorProfile</div>
+  return profileData && (
+    <div>
+      <div>
+        <div>
+          <img src={profileData.image} alt="" />
+        </div>
+        <div>
+          {/* displaying doc info */}
+          <p>{profileData.name}</p>
+          <div>
+          <p>{profileData.degree} {profileData.speciality}</p>
+          {/* <button>{profileData.experiance}</button> */}
+          </div>
+          {/* doc about */}
+          <div>
+            <p>About:</p>
+            <p>{profileData.about}</p>
+          </div>
+
+          <p>Appointment fee: <span>{currency} {[profileData.fees]}</span></p>
+          
+          <div>
+            <p>Address:</p>
+            <p>
+                {profileData.address.line1}
+                 <br />
+                {profileData.address.line2}
+            </p>
+          </div>
+          <div>
+            <input type="checkbox" />
+            <label htmlFor="">Available</label>
+          </div>
+          <button>Edit</button>
+            
+              
+        </div>
+      </div>
+    </div>
   )
 }
 
