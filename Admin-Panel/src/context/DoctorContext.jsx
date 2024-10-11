@@ -34,6 +34,7 @@ const completeAppointment=async(appointmentId)=>{
         if(data.success){
             toast.success(data.message)
             getAllDoctorAppointments()
+            getDashData()
         }else{
             toast.error(data.message)
         }
@@ -51,6 +52,7 @@ const cancelAppointment=async(appointmentId)=>{
         if(data.success){
             toast.success(data.message)
             getAllDoctorAppointments()
+            getDashData()
         }else{
             toast.error(data.message)
         }
