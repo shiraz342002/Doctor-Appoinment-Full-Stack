@@ -166,4 +166,10 @@ const appointmentCancel = async (req, res) => {
       }
     }
 
-export { addDoctor, loginAdmin,allDoctor,appointmentsAdmin,appointmentCancel,adminDashboard };
+export { addDoctor
+         ,loginAdmin
+         ,allDoctor
+         ,appointmentsAdmin
+         ,appointmentCancel
+         ,adminDashboard
+         };
