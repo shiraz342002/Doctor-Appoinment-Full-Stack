@@ -34,6 +34,10 @@ const DoctorsList = async (req, res) => {
 const loginDoctor = async (req, res) => {
     try {
         const {email,password}=req.body
+        // console.log(email);
+        // console.log(password);
+        
+        
         const doctor=await doctorModel.findOne({email})
         if(!doctor){
             res.json({ success: false, message:"Invalid Credentials" });
